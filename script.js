@@ -1,18 +1,20 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
+    // Select the form and feedback div
     const form = document.getElementById("registration-form");
     const feedbackDiv = document.getElementById("form-feedback");
 
-    form.addEventListener("submit", (event) => {
+    // Add submit event listener
+    form.addEventListener("submit", function (event) {
         event.preventDefault(); // Prevent form submission
 
-        // Retrieve and trim input values
+        // Retrieve and trim user inputs
         const username = document.getElementById("username").value.trim();
         const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value.trim();
 
-        // Validation logic
+        // Initialize validation variables
         let isValid = true;
-        const messages = [];
+        let messages = [];
 
         // Username validation
         if (username.length < 3) {
@@ -21,9 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Email validation
-        if (!email.includes("@") || !email.includes(".")) {
+        if (!(email.includes("@") && email.includes("."))) {
             isValid = false;
-            messages.push("Email must include '@' and '.'");
+            messages.push("Enter a valid email address.");
         }
 
         // Password validation
@@ -33,13 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Display feedback
-        feedbackDiv.style.display = "block";
+        feedbackDiv.style.display = "block"; 
         if (isValid) {
             feedbackDiv.textContent = "Registration successful!";
-            feedbackDiv.style.color = "#28a745"; // Green
+            feedbackDiv.style.color = "#28a745";
         } else {
             feedbackDiv.innerHTML = messages.join("<br>");
-            feedbackDiv.style.color = "#dc3545"; // Red
+            feedbackDiv.style.color = "#dc3545";
         }
     });
 });
